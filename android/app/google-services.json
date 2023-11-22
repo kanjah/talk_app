@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "957810117023",
+    "project_id": "lets-talk-8ee16",
+    "storage_bucket": "lets-talk-8ee16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957810117023:android:35d94a2a6b0e6ea33695aa",
+        "android_client_info": {
+          "package_name": "com.mohk.talkapp.talk_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDENtoaxsds0tnXPt7kEHX8EJtrF9JIHLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
