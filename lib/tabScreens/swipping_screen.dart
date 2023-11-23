@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talk_app/controllers/profile_controller.dart';
+import 'package:talk_app/tabScreens/user_details_screen.dart';
 
 import '../global.dart';
 
@@ -85,7 +86,18 @@ class _SwippingScreenState extends State<SwippingScreen> {
 
                           //user data
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              profileController.viewSentAndviewRecieved(
+                                eachProfileInfo.uid
+                                    .toString(), // user being viewed current uid
+                                senderName, // current user name
+                              );
+
+                              //send user to profile person
+                              Get.to(UserDetailsScreen(
+                                userID: eachProfileInfo.uid.toString(),
+                              ));
+                            },
                             child: Column(
                               children: [
                                 //Name

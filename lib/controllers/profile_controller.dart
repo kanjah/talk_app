@@ -141,4 +141,43 @@ class ProfileController extends GetxController {
 
     update();
   }
+
+//VIEW SEND & VIEW RECIEVED METHOD
+  viewSentAndviewRecieved(String toUserID, String senderName) async {
+    //check if the viewRecieved exists or not in the current user list
+    var document = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(toUserID) // id of the profile being liked
+        .collection("viewRecieved")
+        .doc(currentUserID)
+        .get();
+
+    //remove viewRecieved from db list if it exists/or user clicks fav button twice
+    if (document.exists) {
+      print("already in view list");
+    } else {
+      // add  viewRecieved in db
+      //add currentUserID to the viewRecieved list of that profile person [toUserID]
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(toUserID)
+          .collection(
+              "viewRecieved") //creates new viewRecieved folder under the liked person profile
+          .doc(currentUserID)
+          .set({});
+
+      //add profile person [toUserID] to the viewSent list of the currentUser
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUserID)
+          .collection(
+              "viewSent") //creates new viewRecieved folder under the current user profile
+          .doc(toUserID)
+          .set({});
+
+      //send notification
+    }
+
+    update();
+  }
 }

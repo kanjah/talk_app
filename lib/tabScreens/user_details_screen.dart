@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slider/carousel.dart';
+import 'package:get/get.dart';
+
+import '../accountSettingScreen/account_settings_screen.dart';
+import '../global.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   //pass userId to userDetailScreen
@@ -135,19 +139,48 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             ),
           ),
           centerTitle: true,
-          automaticallyImplyLeading: false,
+
+          //Back button
+          //automaticallyImplyLeading: widget.userID == currentUserID ? false : true,
+          leading: widget.userID != currentUserID
+              ? IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new,
+                    size: 30,
+                  ))
+              : Container(),
 
           //sign out button
           actions: [
-            IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: const Icon(
-                Icons.logout,
-                size: 30,
-              ),
-            )
+            widget.userID == currentUserID
+                ? Row(
+                    children: [
+                      //Settings Icon
+                      IconButton(
+                          onPressed: () {
+                            Get.to(AccountSettingsScreen());
+                          },
+                          icon: const Icon(
+                            Icons.settings,
+                            size: 30,
+                          )),
+
+                      //Sign out Icon
+                      IconButton(
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                        },
+                        icon: const Icon(
+                          Icons.logout,
+                          size: 30,
+                        ),
+                      ),
+                    ],
+                  )
+                : Container()
           ],
         ),
         body: SingleChildScrollView(
