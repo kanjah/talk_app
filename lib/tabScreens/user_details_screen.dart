@@ -161,7 +161,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       //Settings Icon
                       IconButton(
                           onPressed: () {
-                            Get.to(AccountSettingsScreen());
+                            Get.to(const AccountSettingsScreen());
                           },
                           icon: const Icon(
                             Icons.settings,
@@ -278,7 +278,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [const Text("data"), const Text("")]),
+                      const TableRow(children: [Text("data"), Text("")]),
 
                       //Age
                       TableRow(
@@ -296,7 +296,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
+                      const TableRow(children: [
                         Text(""),
                         Text(""),
                       ]),
@@ -317,7 +317,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
+                      const TableRow(children: [
                         Text(""),
                         Text(""),
                       ]),
@@ -338,7 +338,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
+                      const TableRow(children: [
                         Text(""),
                         Text(""),
                       ]),
@@ -359,7 +359,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
+                      const TableRow(children: [
                         Text(""),
                         Text(""),
                       ]),
@@ -380,7 +380,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
+                      const TableRow(children: [
                         Text(""),
                         Text(""),
                       ]),
@@ -433,9 +433,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   child: Table(
                     children: [
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Height
@@ -454,9 +454,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Weight
@@ -475,9 +475,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Body Type
@@ -529,9 +529,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                   child: Table(
                     children: [
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Drink
@@ -550,9 +550,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Smoke
@@ -571,9 +571,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Marital status
@@ -592,9 +592,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Have children
@@ -613,9 +613,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Number of Children
@@ -634,9 +634,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Proffesion
@@ -655,9 +655,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Employment Status
@@ -676,9 +676,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Income
@@ -697,9 +697,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Living Condition
@@ -718,9 +718,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Willing to relocate
@@ -739,9 +739,9 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                       ),
 
                       //extra row for spacing
-                      TableRow(children: [
-                        const Text(""),
-                        const Text(""),
+                      const TableRow(children: [
+                        Text(""),
+                        Text(""),
                       ]),
 
                       //Relationship that your looking for

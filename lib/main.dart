@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:talk_app/authenticationScreen/login_screen.dart';
 import 'package:talk_app/controllers/authentication_controller.dart';
@@ -12,6 +13,14 @@ void main() async {
   await Firebase.initializeApp().then((value) {
     //initialize the AuthenticationController from authentication_controller.dart
     Get.put(AuthenticationController());
+  });
+
+  //Asking for permisions to push notifications
+  await Permission.notification.isDenied.then((value) {
+    //If not allowed as for permision
+    if (value) {
+      Permission.notification.request();
+    }
   });
 
   runApp(const MyApp());

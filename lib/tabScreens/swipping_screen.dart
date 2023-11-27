@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talk_app/controllers/profile_controller.dart';
 import 'package:talk_app/tabScreens/user_details_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../global.dart';
 
@@ -19,6 +22,180 @@ class _SwippingScreenState extends State<SwippingScreen> {
 
   String senderName = "";
 
+  //Start chat in Whatsapp method
+  startChattingWhatsApp(String receiverPhoneNumber) async {
+    var androidUrl =
+        "whatsapp://send?phone=$receiverPhoneNumber&text=Hi, can we talk for a minute";
+    var iosUrl =
+        "https://wa.me/$receiverPhoneNumber?text=${Uri.parse('Hi, can we talk for a minute')}";
+
+    try {
+      if (Platform.isIOS) {
+        await launchUrl((Uri.parse(iosUrl)));
+      } else {
+        await launchUrl((Uri.parse(androidUrl)));
+      }
+    } on Exception {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Whatsapp not Found"),
+              content: const Text("Whatsapp is not installed"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text("Ok"),
+                )
+              ],
+            );
+          });
+    }
+  }
+
+  //Apply filter
+  applyFilter() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: const Text("Matching Filter"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text("I am looking for a: "),
+
+                  //Dropdown item(Gender)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DropdownButton<String>(
+                      hint: const Text(
+                        "Select gender",
+                      ),
+                      //chosen gender from global.dart
+                      value: chosenGender,
+                      underline: Container(),
+                      items: ['Male', 'Female', 'Others'].map((value) {
+                        return DropdownMenuItem<String>(
+                          //value from user chosen option, ie male, female or others
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          chosenGender = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  //Dropdown item(Coutry)
+                  const Text("Who lives in "),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DropdownButton<String>(
+                      hint: const Text(
+                        "Select a Country",
+                      ),
+                      //chosen country from global.dart
+                      value: chosenCountry,
+                      underline: Container(),
+                      items: [
+                        'Tanzania',
+                        'Korea',
+                        'China',
+                        'USA',
+                        'India',
+                        'Somalia',
+                        'Ethiopia',
+                        'Mexico',
+                        'Trinidad & Tobego'
+                      ].map((value) {
+                        return DropdownMenuItem<String>(
+                          //value from user chosen option, ie male, female or others
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          chosenCountry = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  //Dropdown iten(Age)
+                  const Text("Who is equat or above "),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DropdownButton<String>(
+                      hint: const Text(
+                        "Select age",
+                      ),
+                      //chosen age from global.dart
+                      value: chosenAge,
+                      underline: Container(),
+                      items: [
+                        '18',
+                        '20',
+                        '23',
+                        '25',
+                        '30',
+                        '35',
+                        '40',
+                        '45',
+                        '50',
+                        '55',
+                        '60'
+                      ].map((value) {
+                        return DropdownMenuItem<String>(
+                          //value from user chosen option, ie male, female or others
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          chosenAge = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+
+                      //getResults from profile_controller.dart
+                      profileController.getResults();
+                    },
+                    child: const Text("Done"))
+              ],
+            );
+          });
+        });
+  }
+
   //get the name of the current user
   readCurrentUserData() async {
     await FirebaseFirestore.instance
@@ -34,7 +211,6 @@ class _SwippingScreenState extends State<SwippingScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     readCurrentUserData();
   }
@@ -74,7 +250,9 @@ class _SwippingScreenState extends State<SwippingScreen> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 8),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    applyFilter();
+                                  },
                                   icon: const Icon(
                                     Icons.filter_list,
                                     size: 30,
@@ -232,7 +410,10 @@ class _SwippingScreenState extends State<SwippingScreen> {
 
                               //Chat button
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  startChattingWhatsApp(
+                                      eachProfileInfo.phoneNo.toString());
+                                },
                                 child: Image.asset(
                                   "images/chat.png",
                                   width: 90,

@@ -22,6 +22,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController ageTextEditingController = TextEditingController();
+  TextEditingController genderTextEditingController = TextEditingController();
   TextEditingController phoneNumberEditingController = TextEditingController();
   TextEditingController cityTextEditingController = TextEditingController();
   TextEditingController countryTextEditingController = TextEditingController();
@@ -228,6 +229,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   editingController: ageTextEditingController,
                   labelText: "Age",
                   iconData: Icons.numbers,
+                  isObsecure: false,
+                ),
+              ),
+
+              const SizedBox(
+                height: 24,
+              ),
+
+              const SizedBox(
+                height: 24,
+              ),
+
+              //Gender
+              SizedBox(
+                //subtracts 36 from the screen size, to make email container fit well
+                width: MediaQuery.of(context).size.width - 36,
+                height: 55,
+                child: CustomTextFieldWidget(
+                  editingController: genderTextEditingController,
+                  labelText: "Gender",
+                  iconData: Icons.male_outlined,
                   isObsecure: false,
                 ),
               ),
@@ -645,6 +667,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               .trim()
                               .isNotEmpty &&
                           ageTextEditingController.text.trim().isNotEmpty &&
+                          genderTextEditingController.text.trim().isNotEmpty &&
                           phoneNumberEditingController.text.trim().isNotEmpty &&
                           cityTextEditingController.text.trim().isNotEmpty &&
                           countryTextEditingController.text.trim().isNotEmpty &&
@@ -719,6 +742,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             emailTextEditingController.text.trim(),
                             passwordTextEditingController.text.trim(),
                             ageTextEditingController.text.trim(),
+                            genderTextEditingController.text.trim(),
                             phoneNumberEditingController.text.trim(),
                             cityTextEditingController.text.trim(),
                             countryTextEditingController.text.trim(),

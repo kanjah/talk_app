@@ -1,4 +1,5 @@
 //USED FOR REGISTERING NEW USER
+//this is modelled from person.dart
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -10,6 +11,7 @@ class Person {
   String? password;
   String? name;
   int? age;
+  String? gender;
   String? phoneNo;
   String? city;
   String? country;
@@ -51,6 +53,7 @@ class Person {
       this.password,
       this.name,
       this.age,
+      this.gender,
       this.phoneNo,
       this.city,
       this.country,
@@ -95,6 +98,7 @@ class Person {
       password: dataSnapshot["password"],
       name: dataSnapshot["name"],
       age: dataSnapshot["age"],
+      gender: dataSnapshot["gender"],
       phoneNo: dataSnapshot["phoneNo"],
       city: dataSnapshot["city"],
       country: dataSnapshot["country"],
@@ -140,6 +144,7 @@ class Person {
         "password": password,
         "name": name,
         "age": age,
+        "gender": gender,
         "phoneNo": phoneNo,
         "city": city,
         "country": country,

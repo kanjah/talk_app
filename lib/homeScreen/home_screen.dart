@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:talk_app/pushNotificationScreen/push_notification_system.dart';
 import 'package:talk_app/tabScreens/favorite_sent_favorite_recieved_screen.dart';
 import 'package:talk_app/tabScreens/like_sent_like_recieved_screen.dart';
 import 'package:talk_app/tabScreens/swipping_screen.dart';
@@ -26,6 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
       userID: FirebaseAuth.instance.currentUser!.uid,
     )
   ];
+
+//for notification generation and listening(foreground, background, terminated)
+  @override
+  void initState() {
+    super.initState();
+    PushNotificationSystem notificationSystem = PushNotificationSystem();
+    notificationSystem.generateDeviceRegistrationToken();
+    notificationSystem.whenNotificationRecieved(context);
+  }
 
   @override
   Widget build(BuildContext context) {

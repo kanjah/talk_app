@@ -32,6 +32,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   double val = 0;
 
   //personal info
+  TextEditingController genderTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController nameTextEditingController = TextEditingController();
@@ -87,6 +88,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
   String password = '';
   String name = '';
   String age = '';
+  String gender = '';
   String phoneNo = '';
   String city = '';
   String country = '';
@@ -169,6 +171,8 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
           nameTextEditingController.text = name;
           age = snapshot.data()!['age'].toString();
           ageTextEditingController.text = age;
+          gender = snapshot.data()!['gender'].toString();
+          genderTextEditingController.text = gender;
           phoneNo = snapshot.data()!['phoneNo'];
           phoneNumberEditingController.text = phoneNo;
           city = snapshot.data()!["city"];
@@ -230,10 +234,11 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
     });
   }
 
-//Update method
+//Update db(firebase)method
   updateUserDataToFirestorDatabase(
     String name,
     String age,
+    String gender,
     String phoneNo,
     String city,
     String country,
@@ -298,6 +303,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
 
       "name": name,
       "age": int.parse(age),
+      "gender": gender.toLowerCase(),
       "phoneNo": phoneNo,
       "city": city,
       "country": country,
@@ -433,6 +439,23 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                               editingController: ageTextEditingController,
                               labelText: "Age",
                               iconData: Icons.numbers,
+                              isObsecure: false,
+                            ),
+                          ),
+
+                          const SizedBox(
+                            height: 24,
+                          ),
+
+                          //Gender
+                          SizedBox(
+                            //subtracts 36 from the screen size, to make email container fit well
+                            width: MediaQuery.of(context).size.width - 36,
+                            height: 55,
+                            child: CustomTextFieldWidget(
+                              editingController: genderTextEditingController,
+                              labelText: "Gender",
+                              iconData: Icons.male_outlined,
                               isObsecure: false,
                             ),
                           ),
@@ -865,6 +888,9 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                                     ageTextEditingController.text
                                         .trim()
                                         .isNotEmpty &&
+                                    genderTextEditingController.text
+                                        .trim()
+                                        .isNotEmpty &&
                                     phoneNumberEditingController.text
                                         .trim()
                                         .isNotEmpty &&
@@ -951,6 +977,8 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen> {
                                       await updateUserDataToFirestorDatabase(
                                           nameTextEditingController.text.trim(),
                                           ageTextEditingController.text.trim(),
+                                          genderTextEditingController.text
+                                              .trim(),
                                           phoneNumberEditingController.text
                                               .trim(),
                                           cityTextEditingController.text.trim(),
